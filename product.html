@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopLite | Product Details</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Custom CSS stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Shared Custom Header/Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+      <div class="container">
+        <!-- Logo Link -->
+        <a class="navbar-brand navbar-brand-custom" href="index.html">
+          <i class="bi bi-lightning-charge-fill me-1"></i>ShopLite
+        </a>
+        
+        <!-- Toggle Button for Mobile Screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#shopLiteNav" aria-controls="shopLiteNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links & Controls -->
+        <div class="collapse navbar-collapse" id="shopLiteNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="register.html">Register</a>
+            </li>
+          </ul>
+          
+          <!-- Action Buttons / Cart Trigger -->
+          <div class="d-flex align-items-center gap-3">
+            <a href="cart.html" class="btn btn-outline-custom cart-badge-container" id="cartBtn" aria-label="Shopping Cart">
+              <i class="bi bi-cart3 fs-5"></i>
+              <span class="cart-badge badge rounded-pill" id="cartBadge">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="py-5">
+    <div class="container">
+      
+      <!-- Back navigation button -->
+      <div class="mb-4">
+        <a href="index.html" class="btn btn-outline-custom">
+          <i class="bi bi-arrow-left me-1"></i> Back to Catalog
+        </a>
+      </div>
+
+      <!-- Loading State Container -->
+      <div id="productLoading" class="row">
+        <div class="col-md-6 mb-4">
+          <div class="skeleton-card" style="height: 450px;">
+            <div class="skeleton skeleton-image" style="height: 100%;"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="skeleton skeleton-text" style="width: 40%; height: 2rem; margin-bottom: 1rem;"></div>
+          <div class="skeleton skeleton-text" style="width: 90%; height: 3rem; margin-bottom: 1.5rem;"></div>
+          <div class="skeleton skeleton-text-short" style="width: 25%; height: 1.5rem; margin-bottom: 1.5rem;"></div>
+          <div class="skeleton skeleton-price" style="width: 35%; height: 2.5rem; margin-bottom: 2rem;"></div>
+          <div class="skeleton skeleton-text" style="width: 100%; height: 6rem; margin-bottom: 2rem;"></div>
+          <div class="skeleton skeleton-btn" style="width: 50%; height: 3rem;"></div>
+        </div>
+      </div>
+
+      <!-- Error Alert Container -->
+      <div id="productError" class="alert alert-danger d-none shadow-sm py-4 text-center" role="alert">
+        <i class="bi bi-exclamation-triangle display-3 text-danger mb-3"></i>
+        <h3 class="alert-heading">Product Not Found</h3>
+        <p class="mb-4">We were unable to locate the details for this product. It may have been removed or the ID is invalid.</p>
+        <a href="index.html" class="btn btn-primary-custom">Return to Homepage</a>
+      </div>
+
+      <!-- Core Product Detail Content (Initially Hidden) -->
+      <article id="productDetails" class="row d-none">
+        <!-- Product Image -->
+        <div class="col-md-6 mb-4 mb-md-0">
+          <div class="detail-img-container shadow-sm">
+            <img src="" alt="" id="productImage" class="detail-img">
+          </div>
+        </div>
+        
+        <!-- Product Information details -->
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+          <!-- Category -->
+          <div id="productCategory" class="text-uppercase text-primary fw-bold tracking-wider mb-2" style="font-size: 0.85rem;"></div>
+          
+          <!-- Title -->
+          <h1 id="productTitle" class="display-5 fw-bold mb-3 text-secondary"></h1>
+          
+          <!-- Rating system stars -->
+          <div class="d-flex align-items-center mb-3">
+            <div class="text-warning me-2" id="starRating">
+              <!-- Render stars dynamically -->
+            </div>
+            <span class="text-muted small" id="ratingText"></span>
+          </div>
+
+          <!-- Price -->
+          <div class="my-3">
+            <span id="productPrice" class="display-6 fw-bold text-primary"></span>
+          </div>
+          
+          <hr class="my-4 text-muted opacity-25">
+
+          <!-- Description -->
+          <div class="mb-4">
+            <h5 class="fw-bold mb-2">Description</h5>
+            <p id="productDescription" class="text-muted leading-relaxed"></p>
+          </div>
+
+          <!-- Action and quantities forms -->
+          <div class="d-flex flex-wrap align-items-center gap-3">
+            <!-- Quantity selection -->
+            <div class="d-flex align-items-center border rounded-2" style="height: 48px; background: white;">
+              <button type="button" class="btn border-0 px-3" id="btnQtyMinus" aria-label="Decrease quantity">
+                <i class="bi bi-dash"></i>
+              </button>
+              <input type="number" id="qtyInput" value="1" min="1" max="20" class="form-control border-0 text-center fw-bold bg-transparent p-0" style="width: 40px; box-shadow: none;">
+              <button type="button" class="btn border-0 px-3" id="btnQtyPlus" aria-label="Increase quantity">
+                <i class="bi bi-plus"></i>
+              </button>
+            </div>
+
+            <!-- Add to Cart Button -->
+            <button class="btn btn-primary-custom px-5 shadow-sm" id="btnAddToCart" style="height: 48px;">
+              <i class="bi bi-cart-plus me-2"></i> Add To Cart
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Shared Custom Footer -->
+  <footer class="footer-custom mt-auto">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <h5 class="text-white mb-3"><i class="bi bi-lightning-charge-fill text-warning me-1"></i>ShopLite</h5>
+          <p class="small text-muted">A beautiful vanilla Javascript e-commerce storefront template, designed for frontend fundamental training and assessments.</p>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 ms-lg-auto">
+          <h6 class="text-white text-uppercase mb-3 small fw-bold">Shop Links</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html">Catalog</a></li>
+            <li class="mb-2"><a href="cart.html">Shopping Cart</a></li>
+            <li class="mb-2"><a href="register.html">Registration</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white text-uppercase mb-3 small fw-bold">API Services</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="https://fakestoreapi.com" target="_blank" rel="noopener">Fake Store API</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4 border-secondary opacity-25">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start small">
+          &copy; 2026 ShopLite. Built with Vanilla JS & Bootstrap 5.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JavaScript Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <!-- Modular Custom JS files -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>

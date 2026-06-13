@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopLite | Home</title>
+  <meta name="description" content="ShopLite - A lightweight premium client-side e-commerce storefront. Browse our catalog and purchase products.">
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Custom CSS stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Shared Custom Header/Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+      <div class="container">
+        <!-- Logo Link -->
+        <a class="navbar-brand navbar-brand-custom" href="index.html">
+          <i class="bi bi-lightning-charge-fill me-1"></i>ShopLite
+        </a>
+        
+        <!-- Toggle Button for Mobile Screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#shopLiteNav" aria-controls="shopLiteNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links & Controls -->
+        <div class="collapse navbar-collapse" id="shopLiteNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="register.html">Register</a>
+            </li>
+          </ul>
+          
+          <!-- Action Buttons / Cart Trigger -->
+          <div class="d-flex align-items-center gap-3">
+            <a href="cart.html" class="btn btn-outline-custom cart-badge-container" id="cartBtn" aria-label="Shopping Cart">
+              <i class="bi bi-cart3 fs-5"></i>
+              <span class="cart-badge badge rounded-pill" id="cartBadge">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main>
+    <!-- Hero / Banner Section -->
+    <section class="hero-section text-center">
+      <div class="container">
+        <h1 class="display-4 mb-3">ShopLite Catalog</h1>
+        <p class="lead text-muted mb-4 mx-auto" style="max-width: 700px;">Discover top-quality electronics, elegant jewelry, and clothing at unbeatable prices. Purely static storefront template powered by public API APIs.</p>
+        <a href="#catalog" class="btn btn-primary-custom btn-lg">
+          Explore Store <i class="bi bi-arrow-down-short ms-1"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="py-5">
+      <div class="container">
+        <div class="row mb-5 align-items-center">
+          <div class="col-lg-4 col-md-5 mb-3 mb-md-0">
+            <h2 class="h3 mb-1">Store Catalog</h2>
+            <p class="text-muted mb-0">Browse through categories or filter products</p>
+          </div>
+          <div class="col-lg-8 col-md-7">
+            <!-- Search & Sort Row -->
+            <div class="row g-3 justify-content-md-end">
+              <div class="col-md-6 col-lg-5">
+                <div class="input-group">
+                  <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                  <input type="search" id="searchInput" class="form-control border-start-0 ps-0" placeholder="Search products..." aria-label="Search products">
+                </div>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <select class="form-select" id="sortSelect" aria-label="Sort products">
+                  <option value="default" selected>Sort by: Default</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Category Pills -->
+        <div class="filter-container" id="categoryFilterContainer">
+          <button class="filter-pill active" data-category="all">All Products</button>
+          <!-- Dynamic category pills will be loaded here -->
+        </div>
+
+        <!-- Feedback Alert Containers (Error or Empty States) -->
+        <div class="alert alert-danger d-none shadow-sm mb-4" id="errorAlert" role="alert">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-triangle-fill fs-4 me-2"></i>
+            <div>
+              <strong>API Error!</strong> We encountered an issue loading products. Please try again later.
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty search results -->
+        <div class="text-center py-5 d-none" id="emptyResults">
+          <i class="bi bi-search-heart text-muted display-4"></i>
+          <p class="lead mt-3">No products match your search query.</p>
+          <button class="btn btn-outline-custom" id="resetFiltersBtn">Reset Filters</button>
+        </div>
+
+        <!-- Dynamic Product Catalog Grid (Initially showing skeletons) -->
+        <div class="product-grid" id="productGrid">
+          <!-- Skeletons placeholders rendered dynamically by JS or static fallback during load -->
+          <div class="skeleton-card">
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text-short"></div>
+            <div class="skeleton skeleton-price"></div>
+            <div class="skeleton skeleton-btn"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text-short"></div>
+            <div class="skeleton skeleton-price"></div>
+            <div class="skeleton skeleton-btn"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text-short"></div>
+            <div class="skeleton skeleton-price"></div>
+            <div class="skeleton skeleton-btn"></div>
+          </div>
+        </div>
+
+        <!-- Pagination controls -->
+        <nav aria-label="Product navigation" class="mt-5">
+          <ul class="pagination justify-content-center" id="paginationContainer">
+            <!-- Render pagination buttons dynamically -->
+          </ul>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Custom Footer -->
+  <footer class="footer-custom mt-auto">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <h5 class="text-white mb-3"><i class="bi bi-lightning-charge-fill text-warning me-1"></i>ShopLite</h5>
+          <p class="small text-muted">A beautiful vanilla Javascript e-commerce storefront template, designed for frontend fundamental training and assessments.</p>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 ms-lg-auto">
+          <h6 class="text-white text-uppercase mb-3 small fw-bold">Shop Links</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html">Catalog</a></li>
+            <li class="mb-2"><a href="cart.html">Shopping Cart</a></li>
+            <li class="mb-2"><a href="register.html">Registration</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white text-uppercase mb-3 small fw-bold">API Services</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="https://fakestoreapi.com" target="_blank" rel="noopener">Fake Store API</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4 border-secondary opacity-25">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start small">
+          &copy; 2026 ShopLite. Built with Vanilla JS & Bootstrap 5.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JavaScript Bundle (contains Popper) CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <!-- Modular Custom JS files -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
