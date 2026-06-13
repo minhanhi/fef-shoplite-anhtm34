@@ -63,7 +63,6 @@ const Cart = {
     }
 
     this.saveItems(items);
-    this.showNotification(`Added "${product.title}" to cart!`);
   },
 
   /**
@@ -89,7 +88,6 @@ const Cart = {
     let items = this.getItems();
     items = items.filter(item => item.id != productId);
     this.saveItems(items);
-    this.showNotification("Item removed from cart");
   },
 
   /**
