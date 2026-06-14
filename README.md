@@ -1,8 +1,3 @@
-# ShopLite — Client-Side E-Commerce Application
-
-ShopLite is a modern, lightweight, multi-page client-side e-commerce storefront built for the **Front-End Engineering Fundamentals (FEF)** course. It showcases semantic HTML5, custom responsive CSS3 layout grids, and vanilla JavaScript without external logic frameworks. Product items are dynamically populated from a public API, and cart data persists using browser-level storage.
-
----
 
 ##  Project Structure
 
@@ -23,4 +18,17 @@ fef-shoplite/
 ```
 Link web deploy: https://beamish-mandazi-0c6897.netlify.app/
 ---
-
+All 4 pages linked via shared navbar: 1.0
+Semantic HTML and valid structure: 1.0
+Home page fetches and renders product list via DOM: 1.5
+Detail page displays correct product by ID: 1.0
+Registration form basic JS validation: 1.0
+Basic responsiveness (no layout breakage): 0.5
+Full cart functionality with localStorage persistence: 1.0
+Search or filter by category: 0.5
+Skipped: Proper loading/error states (temporary blank screen allowed): 0.0 (-0.3)
+Skipped: Hand-written, flawless 3-breakpoint responsive design: 0.0 (-0.2)
+Pagination or "load more" implementation: +0.3 
+Basic product sorting : +0.4
+Skipped: Event delegation, navbar cart badge, toast notifications, search debounce, and code modularization: 0.0, no git history -0.5
+Total: 7.4
